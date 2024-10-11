@@ -48,6 +48,12 @@ public class TaskManager {
         return subtasks.get(id);
     }
 
+    public void deleteAll() {
+        tasks.clear();
+        epics.clear();
+        subtasks.clear();
+    }
+
     public void deleteIdTask(int id) {
         tasks.remove(id);
     }
@@ -60,7 +66,7 @@ public class TaskManager {
         epics.remove(id);
     }
 
-    public void deleteIdSubtasks(int id) {
+    public void deleteIdSubtask(int id) {
         Subtask subtask = subtasks.get(id);
         int epicId = subtask.getEpId();
         Epic epic = epics.get(epicId);
@@ -68,6 +74,35 @@ public class TaskManager {
         epic.getSubIds().remove(Integer.valueOf(id));
 
         updateStatusEpic(epic);
+    }
+
+    public ArrayList<Subtask> printSubtasksByIdEpic(int id) {
+        ArrayList<Subtask> subtaskList = new ArrayList<>();
+        for (Subtask subtask : subtasks.values()) {
+            if (subtask.getEpId() == id) {
+                subtaskList.add(subtask);
+            }
+        }
+        return subtaskList;
+    }
+
+    public void updateTask(Task task) {
+        tasks.put(task.getId(), task);
+    }
+
+    public void updateEpic(Epic epic) {
+        epics.put(epic.getId(), epic);
+        updateStatusEpic(epic);
+    }
+
+    public void updateSubtask(Subtask subtask) {
+        subtasks.put(subtask.getId(), subtask);
+        Epic updateEpic = epics.get(subtask.getEpId()) ;
+        updateStatusEpic(updateEpic);
+    }
+
+    private int nextId() {
+        return nextId++;
     }
 
     private void updateStatusEpic(Epic epic) {
@@ -95,25 +130,6 @@ public class TaskManager {
         } else {
             epic.setStatus(Status.IN_PROGRESS);
         }
-    }
-
-
-    public ArrayList<Subtask> printSubtasksByIdEpic(int id) {
-        ArrayList<Subtask> subtaskList = new ArrayList<>();
-        for (Subtask subtask : subtasks.values()) {
-            if (subtask.getEpId() == id) {
-                subtaskList.add(subtask);
-            }
-        }
-        return subtaskList;
-    }
-
-    public void updateTask(Task task) {
-        tasks.put(task.getId(), task);
-    }
-
-    private int nextId() {
-        return nextId++;
     }
 
 }

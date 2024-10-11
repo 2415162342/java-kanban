@@ -1,9 +1,12 @@
 public class Task {
     private int id;
+    private String name;
     private Status status;
     private String text;
 
-    public Task() {
+    public Task(String name, String text) {
+        this.name = name;
+        this.text = text;
         this.status = Status.NEW;
     }
 
@@ -13,10 +16,6 @@ public class Task {
 
     public int getId() {
         return id;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public void setStatus(Status status) {
