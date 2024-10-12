@@ -48,12 +48,6 @@ public class TaskManager {
         return subtasks.get(id);
     }
 
-    public void deleteAll() {
-        tasks.clear();
-        epics.clear();
-        subtasks.clear();
-    }
-
     public void deleteIdTask(int id) {
         tasks.remove(id);
     }
@@ -64,6 +58,23 @@ public class TaskManager {
             subtasks.remove(idSubtask);
         }
         epics.remove(id);
+    }
+
+    public void deleteAllTask() {
+        tasks.clear();
+    }
+
+    public void deleteAllEpic() {
+        epics.clear();
+        subtasks.clear();
+    }
+
+    public void deleteAllSubtask() {
+        subtasks.clear();
+        for(Epic epic : epics.values()) {
+            epic.getSubIds().clear();
+            updateStatusEpic(epic);
+        }
     }
 
     public void deleteIdSubtask(int id) {

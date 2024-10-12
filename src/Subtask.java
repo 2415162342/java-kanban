@@ -1,10 +1,11 @@
 public class Subtask extends Task {
+    private final int epId;
 
-    public Subtask(String name, String text) {
-        super(name, text);
+
+    public Subtask(int id, String name, Status status, String text, int epId) {
+        super(id, name, status, text);
+        this.epId = epId;
     }
-
-    private int epId;
 
 
     public int getEpId() {
