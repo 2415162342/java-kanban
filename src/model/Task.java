@@ -1,3 +1,7 @@
+package model;
+
+import java.util.Objects;
+
 public class Task {
 
     private int id;
@@ -35,5 +39,17 @@ public class Task {
                 ", text='" + text + '\'' +
                 ", status=" + status +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id && Objects.equals(name, task.name) && Objects.equals(text, task.text) && status == task.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

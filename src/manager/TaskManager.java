@@ -1,3 +1,10 @@
+package manager;
+
+import model.Epic;
+import model.Status;
+import model.Subtask;
+import model.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,7 +28,7 @@ public class TaskManager {
     public void addSubtask(Subtask newSubtask) {
         newSubtask.setId(counter++);
         Epic epic = epicHashMap.get(newSubtask.getEpicId());
-        epic.getSubtasks().add(newSubtask.getId());
+        epic.getSubtasks().add(newSubtask);
         subtaskHashMap.put(newSubtask.getId(), newSubtask);
     }
 
@@ -73,8 +80,8 @@ public class TaskManager {
 
     public void deleteIdEpic(int id) {
         Epic epic = epicHashMap.get(id);
-        for (int sub : epic.getSubtasks()) {
-            subtaskHashMap.remove(sub);
+        for (Subtask sub : epic.getSubtasks()) {
+            subtaskHashMap.remove(sub.getId());
         }
         epicHashMap.remove(id);
     }
@@ -90,11 +97,7 @@ public class TaskManager {
 
     public ArrayList<Subtask> printSubtaskByIdEpic(int id) {
         Epic epic = epicHashMap.get(id);
-        ArrayList<Subtask> subtasksList = new ArrayList<>();
-        for (int sub : epic.getSubtasks()) {
-            subtasksList.add(subtaskHashMap.get(sub));
-        }
-        return subtasksList;
+        return epic.getSubtasks();
     }
 
     public void updateTask(Task task, Status newStatus) {
@@ -117,16 +120,14 @@ public class TaskManager {
 
     private void updateStatusEpic(Epic epic) {
         int countStatusNew = 0;
-        for (int subId : epic.getSubtasks()) {
-            Subtask subtask = subtaskHashMap.get(subId);
-            if (subtask.getStatus().equals(Status.NEW)) {
+        for (Subtask sub : epic.getSubtasks()) {
+            if (sub.getStatus().equals(Status.NEW)) {
                 countStatusNew++;
             }
         }
         int countStatusDone = 0;
-        for (int list : epic.getSubtasks()) {
-            Subtask subtask = subtaskHashMap.get(list);
-            if (subtask.getStatus().equals(Status.DONE)) {
+        for (Subtask sub : epic.getSubtasks()) {
+            if (sub.getStatus().equals(Status.DONE)) {
                 countStatusDone++;
             }
         }
