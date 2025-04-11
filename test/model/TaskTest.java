@@ -5,7 +5,7 @@ import manager.InMemoryTaskManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +23,7 @@ class TaskTest {
         Assertions.assertNotNull(task, "Задача не найдена.");
         Assertions.assertEquals(task, savedTask, "Задачи не совпадают.");
 
-        ArrayList<Task> tasksList = taskManager.getTask();
+        List<Task> tasksList = taskManager.getTask();
 
         Assertions.assertNotNull(tasksList, "Задачи не возвращаются.");
         Assertions.assertEquals(1, tasksList.size(), "Неверное количество задач.");
@@ -36,7 +36,7 @@ class TaskTest {
         taskManager.addTask(task);
 
         historyManager.add(task);
-        final ArrayList<Task> historyList = historyManager.getHistory();
+        final List<Task> historyList = historyManager.getHistory();
 
         Assertions.assertNotNull(historyList, "После добавления задачи, история не должна быть пустой.");
         Assertions.assertEquals(1, historyList.size(), "После добавления задачи, история не должна быть пустой.");
@@ -46,12 +46,12 @@ class TaskTest {
     void deleteTasksTest() {
         Task task = new Task("Task 1", "Text Task 1");
         taskManager.addTask(task);
-        ArrayList<Task> taskList = taskManager.getTask();
+        List<Task> taskList = taskManager.getTask();
 
         Assertions.assertEquals(1, taskList.size(), "После добавления задачи, список задач не должен быть пустой.");
 
         taskManager.deleteTasks();
-        ArrayList<Task> taskListAfterDelete = taskManager.getTask();
+        List<Task> taskListAfterDelete = taskManager.getTask();
         Assertions.assertEquals(0, taskListAfterDelete.size(), "После удаления списка задач, список задач должен быть пустой.");
     }
 
@@ -63,7 +63,7 @@ class TaskTest {
 
         taskManager.deleteIdTask(idTask);
 
-        ArrayList<Task> taskList = taskManager.getTask();
+        List<Task> taskList = taskManager.getTask();
         Task savedTask = null;
         for(Task t : taskList) {
             if(t.getId() == idTask) {
@@ -82,5 +82,4 @@ class TaskTest {
         taskManager.updateTask(task, Status.IN_PROGRESS);
         Assertions.assertEquals(Status.IN_PROGRESS, task.getStatus(), "Статус задачи должен быть IN_PROGRESS");
     }
-
 }

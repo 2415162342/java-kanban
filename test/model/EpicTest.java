@@ -5,7 +5,7 @@ import manager.InMemoryTaskManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +23,7 @@ class EpicTest {
         Assertions.assertNotNull(epic, "Задача не найдена.");
         Assertions.assertEquals(epic, savedEpic, "Задачи не совпадают.");
 
-        ArrayList<Epic> epicList = taskManager.getEpic();
+        List<Epic> epicList = taskManager.getEpic();
 
         Assertions.assertNotNull(epicList, "Задачи не возвращаются.");
         Assertions.assertEquals(1, epicList.size(), "Неверное количество задач.");
@@ -36,7 +36,7 @@ class EpicTest {
         taskManager.addEpic(epic);
 
         historyManager.add(epic);
-        final ArrayList<Task> historyList = historyManager.getHistory();
+        final List<Task> historyList = historyManager.getHistory();
 
         Assertions.assertNotNull(historyList, "После добавления задачи, история не должна быть пустой.");
         Assertions.assertEquals(1, historyList.size(), "После добавления задачи, история не должна быть пустой.");
@@ -46,12 +46,12 @@ class EpicTest {
     void deleteEpicsTest() {
         Epic epic = new Epic("Epic 1", "Text Epic 1");
         taskManager.addEpic(epic);
-        ArrayList<Epic> epicList = taskManager.getEpic();
+        List<Epic> epicList = taskManager.getEpic();
 
         Assertions.assertEquals(1, epicList.size(), "После добавления задачи, список задач не должен быть пустой.");
 
         taskManager.deleteEpics();
-        ArrayList<Epic> epicListAfterDelete = taskManager.getEpic();
+        List<Epic> epicListAfterDelete = taskManager.getEpic();
         Assertions.assertEquals(0, epicListAfterDelete.size(), "После удаления списка задач, список задач должен быть пустой.");
     }
 
@@ -63,7 +63,7 @@ class EpicTest {
 
         taskManager.deleteIdEpic(idEpic);
 
-        ArrayList<Epic> epicList = taskManager.getEpic();
+        List<Epic> epicList = taskManager.getEpic();
         Epic savedEpic = null;
         for(Epic e : epicList) {
             if(e.getId() == idEpic) {

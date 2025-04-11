@@ -6,6 +6,7 @@ import model.Subtask;
 import model.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
 
@@ -21,7 +22,7 @@ public interface TaskManager {
     void deleteIdEpic(int id);
     void deleteIdSubtask(int id);
 
-    ArrayList<Subtask> printSubtaskByIdEpic(int id);
+    List<Subtask> printSubtaskByIdEpic(int id);
 
     void updateTask(Task task, Status newStatus);
     void updateEpic(Epic epic);

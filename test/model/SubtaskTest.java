@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +28,7 @@ class SubtaskTest {
         Assertions.assertNotNull(subtask, "Задача не найдена.");
         Assertions.assertEquals(subtask, savedSubtask, "Задачи не совпадают.");
 
-        ArrayList<Subtask> subtaskList = taskManager.getSubtask();
+        List<Subtask> subtaskList = taskManager.getSubtask();
 
         Assertions.assertNotNull(subtaskList, "Задачи не возвращаются.");
         Assertions.assertEquals(1, subtaskList.size(), "Неверное количество задач.");
@@ -54,12 +55,12 @@ class SubtaskTest {
         Subtask subtask = new Subtask("Subtask 1", "Text Subtask 1", epic.getId());
         taskManager.addSubtask(subtask);
 
-        ArrayList<Subtask> subtaskList = taskManager.getSubtask();
+        List<Subtask> subtaskList = taskManager.getSubtask();
 
         Assertions.assertEquals(1, subtaskList.size(), "После добавления задачи, список задач не должен быть пустой.");
 
         taskManager.deleteEpics();
-        ArrayList<Epic> subtaskListAfterDelete = taskManager.getEpic();
+        List<Epic> subtaskListAfterDelete = taskManager.getEpic();
         Assertions.assertEquals(0, subtaskListAfterDelete.size(), "После удаления списка задач, список задач должен быть пустой.");
     }
 
@@ -73,7 +74,7 @@ class SubtaskTest {
 
         taskManager.deleteIdSubtask(idSubtask);
 
-        ArrayList<Subtask> subtaskList = taskManager.getSubtask();
+        List<Subtask> subtaskList = taskManager.getSubtask();
         Subtask savedSubtask = null;
         for(Subtask s : subtaskList) {
             if(s.getId() == idSubtask) {

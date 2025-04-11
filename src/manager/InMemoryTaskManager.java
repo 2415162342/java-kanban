@@ -5,16 +5,15 @@ import model.Status;
 import model.Subtask;
 import model.Task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
 
     private int counter = 1;
-    private final HashMap<Integer, Task> taskHashMap = new HashMap<>();
-    private final HashMap<Integer, Epic> epicHashMap = new HashMap<>();
-    private final HashMap<Integer, Subtask> subtaskHashMap = new HashMap<>();
-    HistoryManager historyManager = new InMemoryHistoryManager();
+    private final Map<Integer, Task> taskHashMap = new HashMap<>();
+    private final Map<Integer, Epic> epicHashMap = new HashMap<>();
+    private final Map<Integer, Subtask> subtaskHashMap = new HashMap<>();
+    private final HistoryManager historyManager = new InMemoryHistoryManager();
 
     @Override
     public void addTask(Task newTask) {
@@ -34,15 +33,15 @@ public class InMemoryTaskManager implements TaskManager {
         subtaskHashMap.put(newSubtask.getId(), newSubtask);
     }
 
-    public ArrayList<Task> getTask() {
+    public List<Task> getTask() {
         return new ArrayList<>(taskHashMap.values());
     }
 
-    public ArrayList<Epic> getEpic() {
+    public List<Epic> getEpic() {
         return new ArrayList<>(epicHashMap.values());
     }
 
-    public ArrayList<Subtask> getSubtask() {
+    public List<Subtask> getSubtask() {
         return new ArrayList<>(subtaskHashMap.values());
     }
 
@@ -106,7 +105,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Subtask> printSubtaskByIdEpic(int id) {
+    public List<Subtask> printSubtaskByIdEpic(int id) {
         Epic epic = epicHashMap.get(id);
         return epic.getSubtasks();
     }
