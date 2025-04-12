@@ -5,7 +5,6 @@ import manager.InMemoryTaskManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +41,7 @@ class SubtaskTest {
         Subtask subtask = new Subtask("Subtask 1", "Text Subtask 1", epic.getId());
 
         historyManager.add(subtask);
-        final ArrayList<Task> historyList = historyManager.getHistory();
+        final List<Task> historyList = historyManager.getHistory();
 
         Assertions.assertNotNull(historyList, "После добавления задачи, история не должна быть пустой.");
         Assertions.assertEquals(1, historyList.size(), "После добавления задачи, история не должна быть пустой.");

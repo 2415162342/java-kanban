@@ -3,10 +3,11 @@ package manager;
 import model.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    ArrayList<Task> history = new ArrayList<>(10);
+    private final List<Task> history = new ArrayList<>(10);
 
     public void add(Task task) {
         if(history.size() == 10) {
@@ -15,7 +16,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         history.add(task);
     }
 
-    public ArrayList<Task> getHistory() {
+    public List<Task> getHistory() {
         return history;
     }
 }
